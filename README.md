@@ -50,7 +50,7 @@
 
 5.  **Доступ:**
     * **Backend API:** `http://localhost:8000/docs` (Swagger UI)
-    * **Frontend App:** `http://localhost:3000`
+    * **Frontend App:** `http://localhost:5173`
 
 ---
 
