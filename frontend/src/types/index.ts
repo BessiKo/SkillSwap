@@ -1,72 +1,83 @@
-// Базовые типы
-export interface ApiResponse<T> {
-  data: T;
-  message?: string;
+export type UserRole = 'student' | 'admin';
+
+export type BadgeType = 
+  | 'newcomer' 
+  | 'first_exchange' 
+  | 'popular' 
+  | 'top_rated' 
+  | 'mentor' 
+  | 'expert';
+
+export interface Badge {
+  id: number;
+  name: string;
+  type: BadgeType;
+  description: string;
+  icon: string;
 }
 
-export interface PaginatedResponse<T> {
-  items: T[];
-  total: number;
-  page: number;
-  pages: number;
+export interface UserProfile {
+  first_name: string;
+  last_name: string;
+  avatar_url: string | null;
+  bio: string;
+  university: string;
+  faculty: string;
+  year: number | null;
+  rating: number;
+  total_ratings: number;
+  exchanges_completed: number;
+  reviews_received: number;
 }
 
-// Enums из бекенда
-export enum UserRole {
-  STUDENT = "student",
-  TEACHER = "teacher",
-  ADMIN = "admin"
+export interface User {
+  id: string;
+  phone: string;
+  role: UserRole;
+  is_active: boolean;
+  created_at: string;
+  profile: UserProfile | null;
+  badges: Badge[];
 }
 
-export enum AdCategory {
-  PROGRAMMING = "programming",
-  DESIGN = "design",
-  LANGUAGES = "languages",
-  MATH = "math",
-  SCIENCE = "science",
-  BUSINESS = "business",
-  MUSIC = "music",
-  SPORTS = "sports",
-  OTHER = "other"
+export interface UserPublicProfile {
+  id: string;
+  first_name: string;
+  last_name: string;
+  avatar_url: string | null;
+  bio: string;
+  university: string;
+  faculty: string;
+  year: number | null;
+  rating: number;
+  total_ratings: number;
+  exchanges_completed: number;
+  reviews_received: number;
+  badges: Badge[];
 }
 
-export enum AdLevel {
-  BEGINNER = "beginner",
-  INTERMEDIATE = "intermediate",
-  ADVANCED = "advanced"
+export interface ProfileUpdateData {
+  first_name?: string;
+  last_name?: string;
+  bio?: string;
+  university?: string;
+  faculty?: string;
+  year?: number | null;
 }
 
-export enum AdFormat {
-  ONLINE = "online",
-  OFFLINE = "offline",
-  ANY = "any"
+export interface TokenResponse {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  is_new_user: boolean;
 }
 
-export enum DealStatus {
-  PENDING = "pending",
-  ACCEPTED = "accepted",
-  REJECTED = "rejected",
-  COMPLETED = "completed",
-  CANCELLED = "cancelled"
+export interface CodeRequestResponse {
+  message: string;
+  expires_in: number;
+  debug_code?: string;
 }
 
-export enum BadgeType {
-  NEWCOMER = "newcomer",
-  FIRST_EXCHANGE = "first_exchange",
-  POPULAR = "popular",
-  TOP_RATED = "top_rated",
-  MENTOR = "mentor",
-  EXPERT = "expert",
-  CATEGORY_EXPERT = "category_expert"
-}
-
-export enum AdminActionType {
-  USER_BANNED = "user_banned",
-  USER_UNBANNED = "user_unbanned",
-  AD_DELETED = "ad_deleted",
-  AD_HIDDEN = "ad_hidden",
-  AD_RESTORED = "ad_restored",
-  CHAT_DELETED = "chat_deleted",
-  DEAL_CANCELLED = "deal_cancelled",
-  DEAL_MODIFIED = "deal_modified"
+export interface ApiError {
+  detail: string;
 }
